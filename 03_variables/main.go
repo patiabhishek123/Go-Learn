@@ -1,6 +1,10 @@
 package main
 
 import "fmt"
+//we cannot use shorthand notation 
+// outside the function it gives error 
+// eg .  name:="ram"
+// const x="dog" this is absoutely legal 
 
 func main() {
 	var a int = 23
