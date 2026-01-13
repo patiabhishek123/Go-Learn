@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
+	
 	"time"
 )
 
@@ -33,14 +33,38 @@ func main(){
 	// }
 	// // numChan <-5
 
-	emailChan:=make(chan string)
-	done:=make(chan bool)
-	go emailSender(emailChan,done)
-	for i := 0; i < 100; i++ {
-		emailChan<-fmt.Sprint("%d%dabhishek@gmail.com",i,rand.Int31n(50));
-	}
-	fmt.Println("message is sending ... ")
 
+	//EMAIL SENDER
+	// emailChan:=make(chan string)
+	// done:=make(chan bool)
+	// go emailSender(emailChan,done)
+	// for i := 0; i < 10; i++ {
+	// 	x:=rand.Int31n(50)
+	// 	emailChan<-fmt.Sprintf("%dabhishek@gmail.com",x);
+	// }
+	// fmt.Println("message is sending ... ")
+	// close(emailChan)
+
+	//HANDLING MULTIPLE CHANNELS
+	chan1:=make(chan int)
+	chan2:=make(chan string)
+
+	go func(){
+		chan1<-69
+	}()
+	go func(){
+		chan2<-"pong"
+	}()
+
+	for i := 0; i < 2; i++ {
+		select{
+		case chan1Val:=<-chan1:
+			fmt.Printf("%d......",chan1Val)
+		
+		case chan2Val:=<-chan2:
+			fmt.Printf("%s......",chan2Val)
+		}
+	}
 
 
 
