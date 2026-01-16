@@ -10,7 +10,7 @@ type post struct{
 	views int
 }
 func (p *post) inc(wg *sync.WaitGroup){
-	wg.Done()
+	defer wg.Done()
 	p.views+=1;
 }
 
